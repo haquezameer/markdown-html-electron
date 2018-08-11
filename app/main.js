@@ -19,7 +19,11 @@ app.on('ready', () => {
 
 const getFileFromUserSelection = () => {
   const files = dialog.showOpenDialog({
-    properties: ['openFile']
+    properties: ['openFile'],
+    filters: [
+      {name: 'Text Files', extensions: ['txt','text']},
+      {name: 'Markdown Files', extensions: ['md','markdown']}
+    ]
   }); // needs an empty object otherwise will throw error
   const file = files[0];
   console.log(file);
