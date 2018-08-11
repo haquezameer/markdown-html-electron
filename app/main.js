@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, dialog } = require('electron');
 
 let mainWindow = null;
 
@@ -9,9 +9,18 @@ app.on('ready', () => {
 
   mainWindow.once('ready-to-show', () => {
     mainWindow.show();
+    getFileFromUserSelection();
   });
 
   mainWindow.on('closed', () => {
     mainWindow = null;
   });
 });
+
+const getFileFromUserSelection = () => {
+  const files = dialog.showOpenDialog({
+    properties: ['openFile']
+  }); // needs an empty object otherwise will throw error
+  const file = files[0];
+  console.log(file);
+};
